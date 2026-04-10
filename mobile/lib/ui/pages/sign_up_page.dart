@@ -3,8 +3,8 @@ import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           Text(
-            'Sign In &\nGrow Your Finance',
+            'Join Us to Unlock\nYour Growth',
             style: blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
           Container(
             padding: const EdgeInsets.all(22),
             decoration: BoxDecoration(
@@ -37,26 +37,26 @@ class SignInPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // NOTE : email
+                CustomFormField(title: 'Full Name'),
+                const SizedBox(height: 16),
                 CustomFormField(title: 'Email Address'),
                 const SizedBox(height: 16),
-                // NOTE : password
                 CustomFormField(title: 'Password', isObscure: true),
-                const SizedBox(height: 8),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text('Forgot Password', style: blueTextStyle),
-                ),
                 const SizedBox(height: 30),
-                CustomFilledButton(title: 'Sign In', onPress: () {}),
+                CustomFilledButton(
+                  title: 'Continue',
+                  onPress: () {
+                    Navigator.pushNamed(context, '/sign-up-set-profile');
+                  },
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           CustomTextButton(
-            title: 'Create new Account',
+            title: 'Sign In',
             onPress: () {
-              Navigator.pushNamed(context, '/sign-up');
+              Navigator.pushNamed(context, '/sign-in');
             },
           ),
         ],
