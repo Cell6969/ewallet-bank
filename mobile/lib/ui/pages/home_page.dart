@@ -1,4 +1,7 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/widgets/home_latest_transaction_items.dart';
+import 'package:bank_sha/ui/widgets/home_service_items.dart';
+import 'package:bank_sha/ui/widgets/home_user_items.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -63,7 +66,14 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        children: [buildProfile(), buildWalletCard(), buildLevel()],
+        children: [
+          buildProfile(),
+          buildWalletCard(),
+          buildLevel(),
+          buildService(),
+          buildLatestTransaction(),
+          buildSendAgain(),
+        ],
       ),
     );
   }
@@ -200,6 +210,140 @@ class HomePage extends StatelessWidget {
   }
 
   Widget buildService() {
-    return Container();
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Do something',
+            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              HomeServiceItems(
+                iconUrl: 'assets/ic_topup.png',
+                title: 'Top Up',
+                onTap: () {},
+              ),
+              HomeServiceItems(
+                iconUrl: 'assets/ic_send.png',
+                title: 'Send',
+                onTap: () {},
+              ),
+              HomeServiceItems(
+                iconUrl: 'assets/ic_withdraw.png',
+                title: 'Withdraw',
+                onTap: () {},
+              ),
+              HomeServiceItems(
+                iconUrl: 'assets/ic_more.png',
+                title: 'Top Up',
+                onTap: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLatestTransaction() {
+    return Container(
+      margin: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Latest Transaction',
+            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
+          Container(
+            padding: const EdgeInsets.all(22),
+            margin: EdgeInsets.only(top: 14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: whiteColor,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HomeLatestTransactionItems(
+                  urlIcon: 'assets/ic_transaction_cat1.png',
+                  title: 'Top Up',
+                  trxDate: 'Yesterday',
+                  value: '+ Rp. 400.000',
+                ),
+                HomeLatestTransactionItems(
+                  urlIcon: 'assets/ic_transaction_cat2.png',
+                  title: 'Top Up',
+                  trxDate: 'Yesterday',
+                  value: '+ Rp. 400.000',
+                ),
+                HomeLatestTransactionItems(
+                  urlIcon: 'assets/ic_transaction_cat3.png',
+                  title: 'Top Up',
+                  trxDate: 'Yesterday',
+                  value: '+ Rp. 400.000',
+                ),
+                HomeLatestTransactionItems(
+                  urlIcon: 'assets/ic_transaction_cat4.png',
+                  title: 'Top Up',
+                  trxDate: 'Yesterday',
+                  value: '+ Rp. 400.000',
+                ),
+                HomeLatestTransactionItems(
+                  urlIcon: 'assets/ic_transaction_cat5.png',
+                  title: 'Top Up',
+                  trxDate: 'Yesterday',
+                  value: '+ Rp. 400.000',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildSendAgain() {
+    return Container(
+      margin: EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Send Again',
+            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+          ),
+          const SizedBox(height: 14),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                HomeUserItems(
+                  imageUrl: 'assets/img_friend1.png',
+                  username: 'john',
+                ),
+                HomeUserItems(
+                  imageUrl: 'assets/img_friend2.png',
+                  username: 'sebastian',
+                ),
+                HomeUserItems(
+                  imageUrl: 'assets/img_friend3.png',
+                  username: 'budi',
+                ),
+                HomeUserItems(
+                  imageUrl: 'assets/img_friend4.png',
+                  username: 'siti',
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
