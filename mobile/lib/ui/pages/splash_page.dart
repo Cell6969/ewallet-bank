@@ -27,7 +27,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkBackgroundColor,
       body: Center(
         child: Container(
           width: 155,
