@@ -11,12 +11,19 @@ class PinPage extends StatefulWidget {
 
 class _PinPageState extends State<PinPage> {
   final TextEditingController pinController = TextEditingController(text: '');
+  String pin = '123456';
 
   addPin(String number) {
     if (pinController.text.length < 6) {
       setState(() {
         pinController.text = pinController.text + number;
       });
+    }
+
+    if (pinController.text.length == 6) {
+      if (pinController.text == pin) {
+        Navigator.pop(context, true);
+      } else {}
     }
   }
 
