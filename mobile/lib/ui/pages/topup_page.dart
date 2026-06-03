@@ -64,7 +64,9 @@ class TopupPage extends StatelessWidget {
             imageUrl: 'assets/img_bank_ocbc.png',
           ),
           const SizedBox(height: 12),
-          CustomFilledButton(title: 'Continue', onPress: () {}),
+          CustomFilledButton(title: 'Continue', onPress: () {
+            Navigator.pushNamed(context, '/topup-amount');
+          }),
           const SizedBox(height: 57),
         ],
       ),
