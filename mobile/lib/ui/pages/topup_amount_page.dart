@@ -1,6 +1,8 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TopupAmountPage extends StatefulWidget {
   const TopupAmountPage({super.key});
@@ -12,6 +14,30 @@ class TopupAmountPage extends StatefulWidget {
 class _TopupAmountPageState extends State<TopupAmountPage> {
   final TextEditingController amountController = TextEditingController(text: '0');
   String pin = '123456';
+
+  @override
+  void initState() {
+    super.initState();
+
+    amountController.addListener(() {
+      final text = amountController.text;
+      final cleanText = text.replaceAll(RegExp(r'[^0-9]'), '');
+
+      if (cleanText.isEmpty) return;
+
+      final formatted = NumberFormat.currency(
+        locale: 'id',
+        decimalDigits: 0,
+        symbol: '',
+      ).format(int.parse(cleanText));
+
+      if (formatted != text) {
+        amountController.value = amountController.value.copyWith(
+          text: formatted,
+        );
+      }
+    });
+  }
 
   addAmount(String number) {
     if (amountController.text == '0') {
@@ -68,14 +94,14 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
               child: TextFormField(
                 controller: amountController,
                 style: whiteTextStyle.copyWith(
-                  fontSize: 36,
+                  fontSize: 28,
                   fontWeight: medium,
                 ),
                 enabled: false,
                 cursorColor: greyColor,
                 decoration: InputDecoration(
                   prefixIcon: Text('Rp',style: whiteTextStyle.copyWith(
-                  fontSize: 36,
+                  fontSize: 28,
                   fontWeight: medium,
                 )),
                   disabledBorder: UnderlineInputBorder(
@@ -125,7 +151,14 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
           const SizedBox(height: 50,),
           CustomFilledButton(title: 'Chekout Now', onPress: () async {
             if (await Navigator.pushNamed(context, '/pin') == true) {
-              Navigator.pushNamedAndRemoveUntil(context, '/topup-success', (route) => false);
+              await launchUrl(
+                Uri.parse('https://demo.midtrans.com/'),
+                mode: LaunchMode.inAppBrowserView,
+              );
+
+              if (context.mounted) {
+                Navigator.pushNamedAndRemoveUntil(context, '/topup-success', (route) => false);
+              }
             }
           },),
           const SizedBox(height: 30,),
