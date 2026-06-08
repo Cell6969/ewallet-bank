@@ -77,7 +77,7 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 58),
         children: [
-          const SizedBox(height: 36),
+          const SizedBox(height: 60),
           Center(
             child: Text(
               'Total Amount',
@@ -87,21 +87,21 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
               ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 67),
           Align(
             child: SizedBox(
               width: 200,
               child: TextFormField(
                 controller: amountController,
                 style: whiteTextStyle.copyWith(
-                  fontSize: 28,
+                  fontSize: 36,
                   fontWeight: medium,
                 ),
                 enabled: false,
                 cursorColor: greyColor,
                 decoration: InputDecoration(
                   prefixIcon: Text('Rp',style: whiteTextStyle.copyWith(
-                  fontSize: 28,
+                  fontSize: 36,
                   fontWeight: medium,
                 )),
                   disabledBorder: UnderlineInputBorder(
@@ -149,7 +149,7 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             ],
           ),
           const SizedBox(height: 50,),
-          CustomFilledButton(title: 'Chekout Now', onPress: () async {
+          CustomFilledButton(title: 'Checkout Now', onPress: () async {
             if (await Navigator.pushNamed(context, '/pin') == true) {
               await launchUrl(
                 Uri.parse('https://demo.midtrans.com/'),
@@ -161,7 +161,9 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
               }
             }
           },),
-          const SizedBox(height: 30,),
+          const SizedBox(height: 25,),
+          CustomTextButton(title: 'Term & Condition', onPress: (){},),
+          const SizedBox(height: 40,)
         ],
       ),
     );
