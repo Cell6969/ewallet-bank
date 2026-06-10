@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/shared/utils.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/data_provider_items.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _DataProviderPageState extends State<DataProviderPage> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Balance: Rp 50.000.000',
+                    'Balance: ${formatCurrency(50000000)}',
                     style: greyTextStyle.copyWith(fontSize: 12),
                   ),
                 ],

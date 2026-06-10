@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/shared/utils.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,9 @@ class _PinPageState extends State<PinPage> {
     if (pinController.text.length == 6) {
       if (pinController.text == pin) {
         Navigator.pop(context, true);
-      } else {}
+      } else {
+        showSnackBar(context, 'Pin yang anda input salah');
+      }
     }
   }
 

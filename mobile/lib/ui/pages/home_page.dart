@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/shared/utils.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_items.dart';
 import 'package:bank_sha/ui/widgets/home_service_items.dart';
 import 'package:bank_sha/ui/widgets/home_tips_items.dart';
@@ -169,7 +170,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 21),
           Text('Balance', style: whiteTextStyle),
           Text(
-            'Rp. 12.500',
+            formatCurrency(12500),
             style: whiteTextStyle.copyWith(fontSize: 24, fontWeight: semiBold),
           ),
         ],
@@ -290,31 +291,31 @@ class HomePage extends StatelessWidget {
                   urlIcon: 'assets/ic_transaction_cat1.png',
                   title: 'Top Up',
                   trxDate: 'Yesterday',
-                  value: '+ Rp. 400.000',
+                  value: '+ ${formatCurrency(400000)}',
                 ),
                 HomeLatestTransactionItems(
                   urlIcon: 'assets/ic_transaction_cat2.png',
                   title: 'Top Up',
                   trxDate: 'Yesterday',
-                  value: '+ Rp. 400.000',
+                  value: '+ ${formatCurrency(100000)}',
                 ),
                 HomeLatestTransactionItems(
                   urlIcon: 'assets/ic_transaction_cat3.png',
                   title: 'Top Up',
                   trxDate: 'Yesterday',
-                  value: '+ Rp. 400.000',
+                  value: '+ ${formatCurrency(400000)}',
                 ),
                 HomeLatestTransactionItems(
                   urlIcon: 'assets/ic_transaction_cat4.png',
                   title: 'Top Up',
                   trxDate: 'Yesterday',
-                  value: '+ Rp. 400.000',
+                  value: '+ ${formatCurrency(400000)}',
                 ),
                 HomeLatestTransactionItems(
                   urlIcon: 'assets/ic_transaction_cat5.png',
                   title: 'Top Up',
                   trxDate: 'Yesterday',
-                  value: '+ Rp. 400.000',
+                  value: '+ ${formatCurrency(400000)}',
                 ),
               ],
             ),
