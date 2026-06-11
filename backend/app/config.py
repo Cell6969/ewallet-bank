@@ -8,6 +8,7 @@ class AppSettings(BaseSettings):
     APP_NAME:str
     APP_DOMAIN:str
     APP_ENV:str
+    APP_KEY:str
 
     model_config = _base_config
 

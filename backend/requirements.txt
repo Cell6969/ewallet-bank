@@ -5,3 +5,4 @@ asyncpg
 SQLAlchemy
 loguru
 bcrypt
+pyseto
