@@ -34,7 +34,7 @@ class Transaction(BaseModel):
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
     updated_at: Mapped[datetime] = mapped_column(nullable=True)
 
-    user: Mapped["model.User"] = relationship("User", back_populates="Transaction")
+    user: Mapped["model.User"] = relationship("User", back_populates="transaction")
     transaction_type: Mapped["model.TransactionType"] = relationship("TransactionType")
     payment_method: Mapped["model.PaymentMethod"] = relationship("PaymentMethod")
     product: Mapped["model.Product"] = relationship("Product")

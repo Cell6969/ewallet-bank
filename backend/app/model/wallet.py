@@ -16,5 +16,5 @@ class Wallet(BaseModel):
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id',ondelete='CASCADE'), index=True)
 
-    user: Mapped["model.User"] = relationship("User", back_populates="Wallet")
+    user: Mapped["model.User"] = relationship("User", back_populates="wallet")
 

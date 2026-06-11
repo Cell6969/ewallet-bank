@@ -22,5 +22,5 @@ class User(BaseModel):
     updated_at: Mapped[datetime|None] = mapped_column()
 
     # Foreign
-    wallet: Mapped["model.Wallet"] = relationship("Wallet", back_populates="User", uselist=False)
-    transaction:Mapped[list["model.Transaction"]] = relationship("Transaction", back_populates="User")
+    wallet: Mapped["model.Wallet"] = relationship("Wallet", back_populates="user", uselist=False)
+    transaction:Mapped[list["model.Transaction"]] = relationship("Transaction", back_populates="user")
