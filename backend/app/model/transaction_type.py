@@ -3,6 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
 from app.database.sql import BaseModel
 import enum
+from app.util.time import *
 
 class TransactionAction(str, enum.Enum):
     CR = "cr" # credit (+)
@@ -17,7 +18,7 @@ class TransactionType(BaseModel):
     action: Mapped[TransactionAction] = mapped_column(
         Enum(TransactionAction, native_enum=False),
     )
-    thumbnail: Mapped[str | None] = mapped_column(String(255), nullable=False)
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
+    thumbnail: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(default=get_datetime_naive())
     updated_at: Mapped[datetime|None] = mapped_column(nullable=True)
     deleted_at: Mapped[datetime|None] = mapped_column(nullable=True)

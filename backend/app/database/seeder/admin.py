@@ -3,6 +3,8 @@ from app.util import hash
 from app.database.sql import async_session, engine
 from app.model import User
 from faker import Faker
+from datetime import datetime, timezone
+from app.util.time import *
 
 
 fake = Faker('id_ID')
@@ -19,7 +21,8 @@ async def seed_data():
                 "verified": True,
                 "ktp": '327502220999001',
                 "profile_picture": fake.image_url(width=200, height=200),
-                "is_admin": True
+                "is_admin": True,
+                "updated_at": get_datetime_naive()
             }
             user = User(**data)
 

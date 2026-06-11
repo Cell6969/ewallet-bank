@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=255), nullable=False),
     sa.Column('code', sa.String(length=50), nullable=False),
     sa.Column('action', sa.Enum('CR', 'DR', name='transactionaction', native_enum=False), nullable=False),
-    sa.Column('thumbnail', sa.String(length=255), nullable=False),
+    sa.Column('thumbnail', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('deleted_at', sa.DateTime(), nullable=True),

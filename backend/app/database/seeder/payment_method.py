@@ -3,7 +3,7 @@ from app.util import hash
 from app.database.sql import async_session, engine
 from app.model import User,PaymentMethod
 from faker import Faker
-from datetime import datetime
+from app.util.time import *
 
 fake = Faker('id_ID')
 
@@ -13,9 +13,9 @@ async def seed_data():
         async with session.begin():
             print("Seed Payment Method....")
             data = [
-                {"name": 'Bank BCA', 'code': 'bca_va', 'status': 'active', 'updated_at': datetime.now()},
-                {"name": 'Bank BNI', 'code': 'bni_va', 'status': 'active','updated_at': datetime.now()},
-                {"name": 'Bank BRI', 'code': 'bri_va', 'status': 'active','updated_at': datetime.now()},
+                {"name": 'Bank BCA', 'code': 'bca_va', 'status': 'active', 'updated_at': get_datetime_naive()},
+                {"name": 'Bank BNI', 'code': 'bni_va', 'status': 'active','updated_at': get_datetime_naive()},
+                {"name": 'Bank BRI', 'code': 'bri_va', 'status': 'active','updated_at': get_datetime_naive()},
             ]
             
             for d in data:

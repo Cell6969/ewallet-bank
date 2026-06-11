@@ -1,6 +1,6 @@
 from sqlalchemy import String, Numeric, ForeignKey,Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from datetime import datetime
+from app.util.time import *
 from app.database.sql import BaseModel
 import enum
 
@@ -18,6 +18,6 @@ class PaymentMethod(BaseModel):
     status: Mapped[PaymentMethodStatus] = mapped_column(
         Enum(PaymentMethodStatus, native_enum=False)
     )
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(default=get_datetime_naive())
     updated_at: Mapped[datetime] = mapped_column(nullable=True)
     deleted_at: Mapped[datetime | None] = mapped_column(nullable=True)
