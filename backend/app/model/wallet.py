@@ -12,7 +12,7 @@ class Wallet(BaseModel):
     card_number: Mapped[str] = mapped_column(String(20), unique=True, nullable=False)
     balance: Mapped[Decimal] = mapped_column(Numeric(precision=15, scale=2), default=0.00)
     pin: Mapped[str | None] = mapped_column(String(6))
-    created_at: Mapped[datetime] = mapped_column(default=datetime.now)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
 
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id',ondelete='CASCADE'), index=True)
 

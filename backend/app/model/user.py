@@ -18,7 +18,7 @@ class User(BaseModel):
     ktp: Mapped[str|None] = mapped_column(String(255), nullable=True)
     is_admin: Mapped[bool] = mapped_column(default=False)
 
-    created_at: Mapped[datetime] = mapped_column(default=datetime.now)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)
     updated_at: Mapped[datetime|None] = mapped_column()
 
     # Foreign
