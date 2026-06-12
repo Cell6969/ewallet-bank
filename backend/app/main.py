@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 from app.database.sql import engine
 from sqlalchemy import text
 from app.core.log import logger
+from app.core.middleware import set_middleware
 from app.api.router import master_router
 from app.core.exception import add_exception_handler
 from fastapi.staticfiles import StaticFiles
@@ -41,6 +42,9 @@ app.include_router(master_router)
 
 # Exception
 add_exception_handler(app=app)
+
+# Set middleware
+set_middleware(app=app)
 
 @app.get('/docs', include_in_schema=False)
 def docs():

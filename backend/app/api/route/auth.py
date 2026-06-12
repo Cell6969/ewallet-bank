@@ -1,7 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request, Depends
 from app.api.schema.auth import *
 from app.api.dependency import UserServiceDep
 from app.helper.api import ApiResponse
+from app.core.security import get_auth_user
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 
@@ -23,3 +24,7 @@ async def login(
 ):
     user = await service.login(body)
     return ApiResponse.success("Success login user", user)
+
+@router.get('/profile')
+async def profile(user:dict = Depends(get_auth_user)):
+    return user
