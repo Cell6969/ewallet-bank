@@ -15,7 +15,7 @@ class User(BaseModel):
     password: Mapped[str] = mapped_column(nullable=False)
     verified: Mapped[bool | None] = mapped_column(default=False, nullable=True)
     profile_picture: Mapped[str | None] = mapped_column(String(555), nullable=True)
-    ktp: Mapped[str] = mapped_column(String(16), nullable=False)
+    ktp: Mapped[str|None] = mapped_column(String(255), nullable=True)
     is_admin: Mapped[bool] = mapped_column(default=False)
 
     created_at: Mapped[datetime] = mapped_column(default=datetime.now)

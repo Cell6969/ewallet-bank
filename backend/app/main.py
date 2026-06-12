@@ -6,6 +6,9 @@ from contextlib import asynccontextmanager
 from app.database.sql import engine
 from sqlalchemy import text
 from app.core.log import logger
+from app.api.router import master_router
+from app.core.exception import add_exception_handler
+from fastapi.staticfiles import StaticFiles
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -30,6 +33,14 @@ app = FastAPI(
     redoc_url=None,
     version="1.0.0",
 )
+# Public file
+app.mount('/storage', StaticFiles(directory='public'), name='public')
+
+# Router
+app.include_router(master_router)
+
+# Exception
+add_exception_handler(app=app)
 
 @app.get('/docs', include_in_schema=False)
 def docs():

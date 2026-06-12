@@ -6,3 +6,4 @@ SQLAlchemy
 loguru
 bcrypt
 pyseto
+Pillow
