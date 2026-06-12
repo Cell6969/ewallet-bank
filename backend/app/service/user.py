@@ -1,14 +1,17 @@
 from app.service.base import BaseService
 from app.model import User, Wallet
 from sqlalchemy.ext.asyncio import AsyncSession 
-from app.api.schema.auth import RegisterRequest
+from app.api.schema.auth import RegisterRequest, LoginRequest
 from sqlalchemy import select
-from app.core.exception import AlreadyCreated
+from sqlalchemy.orm import selectinload
+from app.core.exception import AlreadyCreated, EntityNotFound, ClientNotAuthorized
 from app.util.file import File
-from app.util.hash import hash
+from app.util.hash import hash, verify_hash
 from app.util.time import get_datetime_naive
 from app.service.wallet import WalletService
-from app.core.log import logger
+from app.util.paseto import Credential
+from datetime import timedelta
+from app.api.schema.auth import UserResponse
 
 class UserService(BaseService[User]):
     def __init__(self, session:AsyncSession, wallet_service: WalletService):
@@ -17,7 +20,8 @@ class UserService(BaseService[User]):
 
     async def register(self, data: RegisterRequest):
         existing_user = (await self.session.execute(
-            select(User).where(User.email == data.email)
+            select(User)
+                .where(User.email == data.email)
         )).scalar_one_or_none()
 
         if existing_user:
@@ -56,5 +60,59 @@ class UserService(BaseService[User]):
 
         self.session.add(wallet)
         await self.session.commit()
-        await self.session.refresh(user)
-        return user
+        await self.session.refresh(user, attribute_names=['wallet'])
+
+        token = Credential.generate_token({
+            'email':user.email,
+            'name': user.name,
+            'id': user.id
+        }, expired=timedelta(hours=1))
+
+        return UserResponse(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            ktp=user.ktp,
+            profile_picture=user.profile_picture,
+            token=token,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+            balance=user.wallet.balance,
+            card_number=user.wallet.card_number,
+            pin=user.wallet.pin,
+            token_expired_in=int(timedelta(hours=1).total_seconds())
+        )
+    
+    async def login(self, data:LoginRequest):
+        user = (await self.session.execute(
+            select(User)
+                .where(User.email == data.email)
+                .options(selectinload(User.wallet))
+        )).scalar_one_or_none()
+
+        if not user:
+            raise EntityNotFound()
+        
+        if not verify_hash(user.password, data.password):
+            raise ClientNotAuthorized()
+        
+        token = Credential.generate_token({
+            'email':user.email,
+            'name': user.name,
+            'id': user.id
+        }, expired=timedelta(hours=1))
+
+        return UserResponse(
+            id=user.id,
+            name=user.name,
+            email=user.email,
+            ktp=user.ktp,
+            profile_picture=user.profile_picture,
+            token=token,
+            created_at=user.created_at,
+            updated_at=user.updated_at,
+            balance=user.wallet.balance,
+            card_number=user.wallet.card_number,
+            pin=user.wallet.pin,
+            token_expired_in=int(timedelta(hours=1).total_seconds())
+        )

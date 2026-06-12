@@ -18,3 +18,7 @@ class ApiResponse(BaseModel, Generic[T]):
     @staticmethod
     def success(message:str,data: T, pagination:Optional[Pagination] = None):
         return ApiResponse(status_code=200, message=message, data=data, pagination=pagination)
+
+    @staticmethod
+    def created(message:str, data:T):
+        return ApiResponse(status_code=201, message=message, data=data)
