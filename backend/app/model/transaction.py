@@ -23,9 +23,10 @@ class Transaction(BaseModel):
         ForeignKey("payment_method.id", ondelete='CASCADE'),
         index=True
     )
-    product_id: Mapped[int] = mapped_column(
+    product_id: Mapped[int|None] = mapped_column(
         ForeignKey("product.id", ondelete='CASCADE'),
-        index=True
+        index=True,
+        nullable=True
     )
     amount: Mapped[Decimal] = mapped_column(Numeric(precision=15,scale=2), nullable=False)
     transaction_code: Mapped[str] = mapped_column(String(255), nullable=False, index=True)

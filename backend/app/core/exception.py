@@ -29,6 +29,10 @@ class AlreadyCreated(Exception):
     """Data already created"""
     status_code = status.HTTP_409_CONFLICT
 
+class InvalidPin(Exception):
+    """Invalid pin from user"""
+    status_code = status.HTTP_400_BAD_REQUEST
+
 def _get_handler(status:int, detail:str):
     def handler(request: Request, exception: Exception) -> Response:
         print(Panel(f"Handled: {exception.__class__.__name__}"))
@@ -41,7 +45,7 @@ def _get_handler(status:int, detail:str):
 def add_exception_handler(app:FastAPI):
     custom_exceptions = [
         EntityNotFound, ClientNotAuthorized, BadCredentials,
-        InvalidToken, BadRequest, AlreadyCreated,
+        InvalidToken, BadRequest, AlreadyCreated, InvalidPin
     ]
     for exc_class in custom_exceptions:
         app.add_exception_handler(

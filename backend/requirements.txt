@@ -7,3 +7,4 @@ loguru
 bcrypt
 pyseto
 Pillow
+midtransclient

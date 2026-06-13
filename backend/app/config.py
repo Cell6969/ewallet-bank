@@ -25,7 +25,13 @@ class DatabaseSettings(BaseSettings):
     def get_db_connection(self) -> str:
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
     
+class MidtransSettings(BaseSettings):
+    MIDTRANS_IS_PRODUCTION:bool
+    MIDTRANS_SERVER_KEY:str
+
+    model_config = _base_config
 
 # Initialize 
 app_settings = AppSettings()
 db_settings = DatabaseSettings()
+midtrans_settings = MidtransSettings()
