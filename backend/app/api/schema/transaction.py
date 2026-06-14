@@ -15,3 +15,7 @@ class TopupRequest(BaseModel):
             raise ValueError("payment method code doesn't exists")
         
         return value
+
+class TopupResponse(BaseModel):
+    token: str
+    redirect_url:str

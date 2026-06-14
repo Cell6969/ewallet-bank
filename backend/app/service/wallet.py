@@ -6,7 +6,7 @@ from app.model import (
     Transaction
 )
 from sqlalchemy.ext.asyncio import AsyncSession 
-from app.api.schema.topup import TopupRequest
+from app.api.schema.transaction import TopupRequest
 from sqlalchemy import select
 from app.core.exception import EntityNotFound, BadRequest, InvalidPin
 from app.util.file import File
